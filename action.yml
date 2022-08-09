@@ -1,0 +1,9 @@
+name: 'Study coding GitHub Action'
+description: 'Solve issues to study coding!'
+inputs:
+  github-token:
+    description: 'GitHub token is required to post Pull Requests'
+    requried: true
+runs:
+  using: 'node16'
+  main: 'index.js'
