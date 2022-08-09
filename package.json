@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/isseikz/study-coding-gh-action#readme",
   "dependencies": {
+    "@actions/core": "^1.9.1",
+    "@actions/github": "^5.0.3",
     "firebase-admin": "^11.0.1"
   }
 }
