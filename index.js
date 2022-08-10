@@ -94,8 +94,7 @@ async function createBranchWithPatch(id, patch) {
     const replacedPatch = patch
     console.log(replacedPatch);
     fs.writeFileSync("../diff.patch", replacedPatch);
-    exec(`cat ../diff.patch`)
-    await exec(`patch -p1 < ../diff.patch`);
+    await exec(`patch -p1 --ignore-whitespace < ../diff.patch`);
     await exec(`git add . `);
     await exec(`git commit -m "Test"`);
     return branchName;
