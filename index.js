@@ -92,6 +92,7 @@ async function createBranchWithPatch(id, patch) {
     const branchName = `test/${id}`;
     await exec(`git checkout -b ${branchName}`);
     const replacedPatch = patch
+    console.log(replacedPatch);
     await fs.writeFile("../diff.patch", replacedPatch, function (err, result) {
         if (err) { throw err; }
     });
