@@ -24,8 +24,9 @@ async function main() {
 
     const githubToken = core.getInput('github-token').trim();
     const octokit = github.getOctokit(githubToken);
+    const collectionName = core.getInput('collection-name').trim();
 
-    const latestTasks = await getLatestTasks();
+    const latestTasks = await getLatestTasks(collectionName);
     const pullRequests = await getPullRequests(octokit, owner, repository);
     const removedPRs = await filterSolvedTasks(latestTasks, pullRequests);
     const appendedTasks = await filterNewTasks(latestTasks, pullRequests);
@@ -39,7 +40,7 @@ async function main() {
     }
 }
 
-async function getLatestTasks() {
+async function getLatestTasks(collectionName) {
     const firebaseConfig = {
         apiKey: process.env.API_KEY,
         authDomain: process.env.AUTH_DOMAIN,
@@ -50,7 +51,7 @@ async function getLatestTasks() {
     };
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const commitsCol = collection(db, 'simplified-commit');
+    const commitsCol = collection(db, collectionName);
     const commitsSnapshot = await getDocs(commitsCol);
     const commits = commitsSnapshot.docs.map(doc => {
         return {
