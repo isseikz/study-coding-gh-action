@@ -91,7 +91,7 @@ async function initializeGit(name, email) {
 async function createBranchWithPatch(id, patch) {
     const branchName = `test/${id}`;
     await exec(`git checkout -b ${branchName}`);
-    const replacedPatch = patch
+    const replacedPatch = patch + "\n";
     console.log(replacedPatch);
     fs.writeFileSync("../diff.patch", replacedPatch);
     await exec(`git apply --stat --ignore-space-change --ignore-whitespace ../diff.patch`);
